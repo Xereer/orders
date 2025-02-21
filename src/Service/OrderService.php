@@ -5,14 +5,12 @@ namespace App\Service;
 use App\Entity\OrderEntity;
 use App\Entity\UserEntity;
 use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 class OrderService
 {
     public function __construct(
-        private readonly ManagerRegistry $managerRegistry,
+        private readonly EntityManagerInterface $entityManager,
     ) {}
 
     public function createOrder(): int
@@ -20,10 +18,10 @@ class OrderService
         $order = (new OrderEntity())
             ->setName('Заказ')
             ->setCreateDate(new DateTime())
-            ->setUser($this->managerRegistry->getManager()->find(UserEntity::class, 16));
+            ->setUser($this->entityManager->getReference(UserEntity::class, 16));
 
-        $this->managerRegistry->getManager()->persist($order);
-        $this->managerRegistry->getManager()->flush();
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
 
         return $order->getId();
     }

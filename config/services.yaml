@@ -8,7 +8,6 @@ services:
 
     App\Controller\:
         resource: '../src/Controller'
-        tags: ['controller.service_arguments']
 
     App\:
         resource: '../src/'
@@ -17,6 +16,6 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\EventListener\JsonResponseListener:
+    App\EventListener\ResponseListener:
         tags:
             - { name: kernel.event_listener, event: kernel.view, method: onKernelView }

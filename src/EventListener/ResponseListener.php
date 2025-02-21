@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
-class JsonResponseListener
+class ResponseListener
 {
     public function onKernelView(ViewEvent $event): void
     {
@@ -16,13 +16,6 @@ class JsonResponseListener
             return;
         }
 
-        $event->setResponse(
-            new JsonResponse(
-                [
-                    'success' => true,
-                    'rows' => $result
-                ]
-            )
-        );
+        $event->setResponse(new JsonResponse($result));
     }
 }

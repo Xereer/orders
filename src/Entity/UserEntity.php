@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\{Entity, GeneratedValue, Id, Column, OneToMany, Sequenc
 
 #[Entity(repositoryClass: UserRepository::class)]
 #[Table(name: 'USERS')]
-class UserEntity
+class UserEntity extends BaseEntity
 {
     #[Id]
     #[GeneratedValue(strategy: 'SEQUENCE')]
