@@ -25,11 +25,10 @@ class UserController extends AbstractController {
         return new JsonResponse(data: $this->userService->createUser(json_decode($request->getContent(), true)), json: true);
     }
 
-    #[Route('/login', name: 'user_login', methods: ['GET'])]
+    #[Route('/login', name: 'user_login', methods: ['POST'])]
     public function login(): void {}
 
     #[Route('/get', name: 'get_user', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
     public function get(): JsonResponse
     {
         $user = $this->getUser();
@@ -38,28 +37,25 @@ class UserController extends AbstractController {
     }
 
     #[Route('/delete/{id}', name: 'delete_user', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
     public function delete(int $id): JsonResponse
     {
         $this->userService->deleteUser($id);
-        return new JsonResponse('Успех');
+        return new JsonResponse('Success');
     }
 
     #[Route('/grant', name: 'grant_privilege', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
     public function grantPrivilege(Request $request): JsonResponse
     {
         $request = json_decode($request->getContent(), true);
         $this->userService->grantPrivilege($request['userId'], $request['role']);
-        return new JsonResponse('Успех');
+        return new JsonResponse('Success');
     }
 
     #[Route('/revoke', name: 'revoke_privilege', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
     public function revokePrivilege(Request $request): JsonResponse
     {
         $request = json_decode($request->getContent(), true);
         $this->userService->revokePrivilege($request['userId'], $request['role']);
-        return new JsonResponse('Успех');
+        return new JsonResponse('Success');
     }
 }

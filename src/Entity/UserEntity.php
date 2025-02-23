@@ -7,11 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\{Entity, GeneratedValue, Id, Column, OneToMany, SequenceGenerator, Table};
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity]
 #[Table(name: 'USERS')]
+#[UniqueEntity(fields: ['email'], message: 'Этот email уже используется.')]
 class UserEntity extends BaseEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[Id]
@@ -26,7 +28,7 @@ class UserEntity extends BaseEntity implements UserInterface, PasswordAuthentica
     #[Column(name: 'LOGIN', type: Types::STRING, nullable: false)]
     private string $login;
 
-    #[Column(name: 'EMAIL', type: Types::STRING, nullable: false)]
+    #[Column(name: 'EMAIL', type: Types::STRING, unique: true, nullable: false)]
     private string $email;
 
     #[Column(name: 'PASSWORD', type: Types::STRING, nullable: true)]
@@ -218,6 +220,6 @@ class UserEntity extends BaseEntity implements UserInterface, PasswordAuthentica
 
     public function getUserIdentifier(): string
     {
-        return $this->id;
+        return $this->email;
     }
 }

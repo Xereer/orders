@@ -24,6 +24,7 @@
         "symfony/runtime": "6.4.*",
         "symfony/serializer": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
         "symfony/yaml": "6.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -77,6 +78,8 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
+        "fakerphp/faker": "^1.24",
         "phpunit/phpunit": "*",
         "symfony/maker-bundle": "^1.62"
     }

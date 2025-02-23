@@ -31,7 +31,7 @@ class UserService extends BaseService
         $user = (new UserEntity())
             ->setName($userData['name'])
             ->setLogin($userData['login'])
-            ->setEmail('gleb.romanov2002@mail.ru')
+            ->setEmail($userData['email'])
             ->setRegistrationDate(new DateTime())
             ->setRoles(['ROLE_USER'])
             ->setStatus(UserStatusEnum::Active->value);

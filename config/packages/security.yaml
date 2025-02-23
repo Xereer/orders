@@ -6,7 +6,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\UserEntity
-                property: id
+                property: email
 
     firewalls:
         dev:
@@ -18,7 +18,7 @@ security:
             stateless: true
             json_login:
                 check_path: /user/login
-                username_path: id
+                username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
@@ -37,3 +37,4 @@ security:
         - { path: ^/user/grant, roles: ROLE_ADMIN}
         - { path: ^/user/revoke, roles: ROLE_ADMIN}
         - { path: ^/order/get, roles: [ROLE_ADMIN, ROLE_USER]}
+        - { path: ^/order/delete, roles: [ROLE_ADMIN, ROLE_USER]}
