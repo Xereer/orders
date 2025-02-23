@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Service;
 use App\Entity\OrderEntity;
 use App\Entity\UserEntity;
 use App\Enum\OrderStatusEnum;
-use App\Enum\PrivilegeThesaurus;
+use App\Enum\PrivilegeEnum;
 use App\Repository\OrderRepository;
 use App\Service\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +72,7 @@ class OrderServiceTest extends TestCase
     {
         $userId = 1;
         $user = $this->createMock(UserEntity::class);
-        $user->method('getRoles')->willReturn([PrivilegeThesaurus::ROLE_ADMIN->name]);
+        $user->method('getRoles')->willReturn([PrivilegeEnum::ROLE_ADMIN->name]);
         $user->method('getId')->willReturn($userId);
 
         $expectedOrders = [
@@ -110,7 +110,7 @@ class OrderServiceTest extends TestCase
     {
         $userId = 1;
         $user = $this->createMock(UserEntity::class);
-        $user->method('getRoles')->willReturn([PrivilegeThesaurus::ROLE_ADMIN->name]);
+        $user->method('getRoles')->willReturn([PrivilegeEnum::ROLE_ADMIN->name]);
         $user->method('getId')->willReturn($userId);
 
         $expectedOrders = [

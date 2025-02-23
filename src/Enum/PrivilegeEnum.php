@@ -2,7 +2,7 @@
 
 namespace App\Enum;
 
-enum PrivilegeThesaurus: int
+enum PrivilegeEnum: int
 {
     case PUBLIC_ACCESS = 1;
 

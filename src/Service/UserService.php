@@ -6,7 +6,7 @@ use App\Dto\UserDto;
 use App\Entity\OrderEntity;
 use App\Entity\UserEntity;
 use App\Enum\OrderStatusEnum;
-use App\Enum\PrivilegeThesaurus;
+use App\Enum\PrivilegeEnum;
 use App\Enum\UserStatusEnum;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +72,7 @@ class UserService extends BaseService
 
     public function grantPrivilege(int $userId, int $privilege): void
     {
-        $privilegeName = [PrivilegeThesaurus::from($privilege)->name];
+        $privilegeName = [PrivilegeEnum::from($privilege)->name];
         $user = $this->entityManager->find(UserEntity::class, $userId);
 
         $newPrivileges = array_merge($user->getRoles(), $privilegeName);
@@ -83,7 +83,7 @@ class UserService extends BaseService
 
     public function revokePrivilege(int $userId, int $privilege): void
     {
-        $privilegeName = [PrivilegeThesaurus::from($privilege)->name];
+        $privilegeName = [PrivilegeEnum::from($privilege)->name];
         $user = $this->entityManager->find(UserEntity::class, $userId);
 
         $user->setRoles(array_diff($user->getRoles(), $privilegeName));

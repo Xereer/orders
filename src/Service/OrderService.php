@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Entity\OrderEntity;
 use App\Entity\UserEntity;
 use App\Enum\OrderStatusEnum;
-use App\Enum\PrivilegeThesaurus;
+use App\Enum\PrivilegeEnum;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -38,7 +38,7 @@ class OrderService
     public function getOrders(?int $userId, UserInterface $user): array
     {
         $isAdmin = true;
-        if (!in_array(PrivilegeThesaurus::ROLE_ADMIN->name, $user->getRoles())) {
+        if (!in_array(PrivilegeEnum::ROLE_ADMIN->name, $user->getRoles())) {
             $userId = $user->getId();
             $isAdmin = false;
         } elseif (!isset($userId)) {
@@ -58,7 +58,7 @@ class OrderService
     {
         $params = ['id' => $orderId];
 
-        if (!in_array(PrivilegeThesaurus::ROLE_ADMIN->name, $user->getRoles())) {
+        if (!in_array(PrivilegeEnum::ROLE_ADMIN->name, $user->getRoles())) {
             $params['userId'] = $user->getId();
         }
 

@@ -4,7 +4,7 @@ namespace App\Tests\Unit\Service;
 
 use App\Dto\UserDto;
 use App\Entity\UserEntity;
-use App\Enum\PrivilegeThesaurus;
+use App\Enum\PrivilegeEnum;
 use App\Enum\UserStatusEnum;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -125,7 +125,7 @@ class UserServiceTest extends TestCase
     public function testGrantPrivilege(): void
     {
         $userId = 1;
-        $privilege = PrivilegeThesaurus::ROLE_ADMIN->value;
+        $privilege = PrivilegeEnum::ROLE_ADMIN->value;
         $user = new UserEntity();
         $user->setRoles(['ROLE_USER']);
 
@@ -148,7 +148,7 @@ class UserServiceTest extends TestCase
     public function testRevokePrivilege(): void
     {
         $userId = 1;
-        $privilege = PrivilegeThesaurus::ROLE_ADMIN->value;
+        $privilege = PrivilegeEnum::ROLE_ADMIN->value;
         $user = new UserEntity();
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
 
