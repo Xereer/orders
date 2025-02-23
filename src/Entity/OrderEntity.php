@@ -2,16 +2,18 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping\{Column, Entity, GeneratedValue, Id, JoinColumn, ManyToOne, Table};
+use App\Repository\OrderRepository;
+use Doctrine\ORM\Mapping\{Column, Entity, GeneratedValue, Id, JoinColumn, ManyToOne, SequenceGenerator, Table};
 use DateTime;
 use Doctrine\DBAL\Types\Types;
 
-#[Entity]
+#[Entity(repositoryClass: OrderRepository::class)]
 #[Table(name: 'ORDERS')]
-class OrderEntity
+class OrderEntity extends BaseEntity
 {
     #[Id]
     #[GeneratedValue(strategy: 'SEQUENCE')]
+    #[SequenceGenerator(sequenceName: 'order_sequence', allocationSize: 1, initialValue: 1)]
     #[Column(name: 'ID', type: Types::INTEGER, nullable: false)]
     private int $id;
 
@@ -29,6 +31,9 @@ class OrderEntity
 
     #[Column(name: 'VALID_TO', type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $validTo;
+
+    #[Column(name: 'STATUS', type: Types::INTEGER, nullable: false)]
+    private int $status;
 
     #[ManyToOne(targetEntity: UserEntity::class, inversedBy: 'orders')]
     #[JoinColumn(name: 'USER_ID', referencedColumnName: 'ID', nullable: false)]
@@ -147,6 +152,24 @@ class OrderEntity
     public function setUser(UserEntity $user): OrderEntity
     {
         $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     * @return OrderEntity
+     */
+    public function setStatus(int $status): OrderEntity
+    {
+        $this->status = $status;
         return $this;
     }
 }

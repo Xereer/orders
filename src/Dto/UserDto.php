@@ -7,9 +7,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 class UserDto
 {
+    #[Groups(['user'])]
     public int $id;
 
+    #[Groups(['user'])]
     public string $name;
 
-    public DateTime $registrationDate;
+    #[Groups(['user'])]
+    public string $login;
 }

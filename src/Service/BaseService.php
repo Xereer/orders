@@ -10,7 +10,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 class BaseService
 {
     public function __construct(
-        protected readonly EntityManagerInterface $entityManager,
-        protected readonly SerializerInterface|NormalizerInterface|DenormalizerInterface $serializer,
+        protected readonly EntityManagerInterface $entityManager
     ) {}
 }

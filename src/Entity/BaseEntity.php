@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use ReflectionClass;
+use ReflectionException;
 
 class BaseEntity
 {
+    /**
+     * @throws ReflectionException
+     */
     public function entityToDto(string $className): object
     {
         $dto = new $className;
